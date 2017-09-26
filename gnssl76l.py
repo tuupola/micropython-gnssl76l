@@ -16,11 +16,11 @@ class GNSSL76L:
 
     def read(self, chunksize=255):
         data = self.i2c.readfrom(self.address, chunksize)
-        while data[-2:] != b"\n\n":
+        while data[-2:] != b"\x0a\x0a":
             utime.sleep_ms(2)
             data = data + self.i2c.readfrom(self.address, chunksize)
 
-        return data.replace(b"\n", b"").replace(b"\r", b"\r\n")
+        return data.replace(b"\x0a", b"").replace(b"\x0d", b"\x0d\x0a")
 
     def sentences(self):
         return self.read().splitlines()
