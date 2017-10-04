@@ -25,4 +25,10 @@ repl:
 reset:
 	rshell --port /dev/tty.usbmodem* --timing --buffer-size=32 repl "~ import machine ~ machine.reset()~"
 
-.PHONY: help watch shell repl reset sync
+dist:
+	python3 setup.py sdist
+
+publish:
+	twine upload dist/*
+
+.PHONY: help watch shell repl reset sync dist publish
