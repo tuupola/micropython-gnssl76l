@@ -1,3 +1,12 @@
+# This file is part of MicroPython GNSSL76L driver
+# Copyright (c) 2017 Mika Tuupola
+#
+# Licensed under the MIT license:
+#   http://www.opensource.org/licenses/mit-license.php
+#
+# Project home:
+#   https://github.com/tuupola/micropython-gnssl76l
+
 """
 MicroPython Quectel GNSS L76-L (GPS) I2C driver
 """
