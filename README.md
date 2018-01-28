@@ -38,6 +38,27 @@ while True:
     utime.sleep_ms(1000)
 ```
 
+More realistic usage with timer. If you get `OSError: 26` or `i2c driver install error` after soft reboot do a hard reboot.
+
+```python
+import micropython
+from machine import I2C, Pin, Timer
+from gnssl76l import GNSSL76L
+
+micropython.alloc_emergency_exception_buf(100)
+
+i2c = I2C(scl=Pin(26), sda=Pin(25))
+gps = GNSSL76L(i2c)
+
+def read_gps(timer):
+    for sentence in gps.sentences():
+        print(sentence)
+    print("\n")
+
+timer_0 = Timer(0)
+timer_0.init(period=1000, mode=Timer.PERIODIC, callback=read_gps)
+```
+
 ## License
 
 The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
